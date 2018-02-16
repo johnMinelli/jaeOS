@@ -90,10 +90,58 @@ pcb_t *outProcQ(pcb_t **head, pcb_t *p){
     return NULL;
 }
 
-
-
-
-int main() {
-    printf("Hello, World!\n");
-    return 0;
+void insertChild(pcb_t *parent, pcb_t *p){
+    p ->p_parent = parent;
+    p ->p_sib = parent->p_first_child;
+    parent ->p_first_child = p;
 }
+
+pcb_t *removeChild(pcb_t *p){
+    if(p ->p_first_child != NULL){
+        pcb_t *temp = p ->p_first_child;
+        p ->p_first_child = p ->p_first_child ->p_sib;
+        //devo rimuovere i riferimenti di temp?
+        return temp;
+    }
+    return NULL;
+}
+
+pcb_t *outChild(pcb_t* p){
+    if(p!=NULL && p->p_parent != NULL)){
+        if(p -> p_parent -> p_first_child==p){
+            //se proprio vuoi manca il controllo sul figlio del padre di p
+            p -> p_parent -> p_first_child = p -> p_sib;
+            return p;
+        }else{
+            return outChild_scan(&(p -> p_parent -> p_first_child),p);
+        }
+    }
+    return NULL;
+}
+
+
+pcb_t *outChild_scan(pcb_t **head, pcb_t* p){
+    if(!(*head==NULL || p==NULL)){
+        if(*head==p){
+            //togli
+            return p->p_sib;
+        }else{
+            pcb_t *out = outChild_scan(&(*head)->p_sib,p);
+            if(out==NULL) {
+                return NULL;
+            }else if(out!=p){
+                (*head)->p_sib = out;
+            }
+            return p;
+        }
+    }
+    return NULL;
+}
+
+
+            int main() {
+                printf("Hello, World!\n");
+                return 0;
+            }
+        }
+    }
