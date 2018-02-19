@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #define MAXPROC 20
 #define MAXSEMD MAXPROC
 #define ASHDSIZE 8
-
+#define MAX_PCB_PRIORITY		10
+#define MIN_PCB_PRIORITY		0
+#define DEFAULT_PCB_PRIORITY		5
 
 
 typedef struct pcb_t {
@@ -30,13 +33,24 @@ semd_t *semdFree_h;
 semd_t semd_table[MAXSEMD];
 semd_t *semdhash[ASHDSIZE];
 
+void initPcbs_scan(int i, pcb_t **p){
+    if (i<MAXPROC) {
+        *p = &pcbFree_table[i++];
+        (*p) -> p_next = NULL;
+        (*p) -> p_parent = NULL;
+        (*p) -> p_first_child = NULL;
+        (*p) -> p_sib = NULL;
+        (*p) -> priority = 0;
+        (*p) -> p_semKey = NULL;
+        initPcbs_scan(i,&(*p)->p_next);
+    }
+}
 void initPcbs() {
-    pcbfree_h =(pcb_t*) malloc(sizeof(pcbFree_table));
+    initPcbs_scan(0, &pcbfree_h);
 }
 
-//free di un processo      ERROREEEEEE
 void freePcb(pcb_t *p){
-    if (p != NULL){             //<----- inserimento in coda e non in testa!!!!
+    if (p != NULL){             //<----- inserimento in coda o in testa??
         p -> p_next=pcbfree_h;
         pcbfree_h=p;
     }
@@ -109,11 +123,22 @@ void forallProcQ(pcb_t *head, void fun(pcb_t *pcb, void *), void *arg) {
 
 //___________________________________TREE__________________________________________________________________
 
+//restituisce l'ultimo fratello di p
+pcb_t *lastSib(pcb_t *p){
+    if(p->p_sib != NULL){
+        return lastSib(p->p_sib);
+    }
+    return p;
+}
+
 //inserisce p tra i figli di parent
 void insertChild(pcb_t *parent, pcb_t *p){
-    p ->p_parent = parent;
-    p ->p_sib = parent->p_first_child;
-    parent ->p_first_child = p;
+    p -> p_parent = parent;
+    if(parent -> p_first_child == NULL){
+        parent -> p_first_child = p;
+    }else{
+        lastSib(parent -> p_first_child) -> p_sib = p;
+    }
 }
 
 //rimuove il primo figlio di p
@@ -121,28 +146,31 @@ pcb_t *removeChild(pcb_t *p){
     if(p ->p_first_child != NULL){
         pcb_t *temp = p ->p_first_child;
         p ->p_first_child = p ->p_first_child ->p_sib;
-        //devo rimuovere i riferimenti di temp?
+        temp ->p_parent = NULL;
+        temp ->p_sib = NULL;
         return temp;
     }
     return NULL;
 }
 
 //rimuove (p) un PCB dalla lista dei figli di suo padre
-pcb_t *outChild(pcb_t* p){
-    if(p!=NULL && p->p_parent != NULL) {
-        return outChild_scan(&(p->p_parent->p_first_child), p);
-    }
-    return NULL;
-}
-
-pcb_t *outChild_scan(pcb_t **head, pcb_t* p){
+pcb_t* outChild_scan(pcb_t **head, pcb_t* p){
     if(!(*head==NULL || p==NULL)){
         if(*head==p){
             (*head) = p->p_sib;
+            p ->p_parent = NULL;
+            p ->p_sib = NULL;
             return p;
         }else{
             return outChild_scan(&(*head)->p_sib,p);
         }
+    }
+    return NULL;
+}
+
+pcb_t *outChild(pcb_t* p){
+    if(p!=NULL && p->p_parent != NULL) {
+        return outChild_scan(&(p->p_parent->p_first_child), p);
     }
     return NULL;
 }
@@ -217,12 +245,6 @@ pcb_t *headBlocked(int *key) {
 }
 
 //ausiliarie per free-are un semaforo con coda vuota
-void removeSemd(int *key){
-    int n = ((int)(key)/(int)sizeof(int))%ASHDSIZE;
-    setSemd(&semdFree_h,removeSemd_scan(&semdhash[n],key)); //mette tra i liberi quello che rimuove
-}
-
-
 semd_t *removeSemd_scan(semd_t **head,int *key) {
     if (*head != NULL) {
         if((*head) ->s_key == key){
@@ -235,6 +257,12 @@ semd_t *removeSemd_scan(semd_t **head,int *key) {
     }
     return NULL;
 }
+
+void removeSemd(int *key){
+    int n = ((int)(key)/(int)sizeof(int))%ASHDSIZE;
+    setSemd(&semdFree_h,removeSemd_scan(&semdhash[n],key)); //mette tra i liberi quello che rimuove
+}
+
 
 //rimuove il PCB in testa alla coda dei bloccati del semaforo che ha key
 pcb_t* removeBlocked(int *key){
@@ -270,18 +298,16 @@ void forallBlocked(int *key, void *fun(pcb_t *pcb, void *), void *arg) {
     }
 }
 
-void initASL()    //<--  non sono certo della alloc io
-
-
-
-
-
-
-        int main() {
-                if(-1){
-
-                printf("Hello, World!\n");
-                return 0;
-            }
+void initASL_scan(int i, semd_t **s){
+    if (i<MAXSEMD) {
+        *s = &semd_table[i++];
+        (*s) -> s_next = NULL;
+        (*s) -> s_key = NULL;
+        (*s) -> s_procQ = NULL;
+        initASL_scan(i,&(*s)->s_next);
+    }
 }
 
+void initASL() {
+    initPcbs_scan(0, &semdFree_h);
+}
