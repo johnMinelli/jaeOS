@@ -1,35 +1,12 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
+#include <uARMconst.h>
+#include <uARMtypes.h>
 
-#define MAXPROC 20
-#define MAXSEMD MAXPROC
-#define ASHDSIZE 8
-#define MAX_PCB_PRIORITY		10
-#define MIN_PCB_PRIORITY		0
-#define DEFAULT_PCB_PRIORITY		5
+#include "../h/phase1.h"
+#include "../h/constants.h"
 
 
-
-typedef struct pcb_t {
-    struct pcb_t *p_next;
-    struct pcb_t *p_parent;
-    struct pcb_t *p_first_child;
-    struct pcb_t *p_sib;
-    //state_t p_s;
-    int priority;
-    int *p_semKey;
-} pcb_t;
-
-typedef struct semd_t {
-    struct semd_t *s_next;
-    int *s_key;
-    struct pcb_t *s_procQ;
-} semd_t;
-
-
-pcb_t *pcbfree_h;  //  testa  della  lista dei  PCB  che  sono  liberi o  inutilizzati.
-pcb_t pcbFree_table[MAXPROC]; // array  di PCB
+pcb_t *pcbfree_h;  //  testa  della  lista dei  PCB  che  sono  liberi o  inutilizzati.
+pcb_t pcbFree_table[MAXPROC]; // array  di PCB
 semd_t *semdFree_h;
 semd_t semd_table[MAXSEMD];
 semd_t *semdhash[ASHDSIZE];
@@ -69,7 +46,7 @@ pcb_t *allocPcb(){
         temp -> p_first_child = NULL;
         temp -> p_sib = NULL;
         //stato ??
-        //priority ??
+        temp -> priority = 0;
         temp -> p_semKey = NULL;
         return temp;
     }
@@ -266,7 +243,7 @@ void removeSemd(int *key){
 }
 
 
-//rimuove il PCB in testa alla coda dei bloccati del semaforo che ha key
+//rimuove il PCB in testa alla coda dei bloccati del semaforo che ha key
 pcb_t* removeBlocked(int *key){
     pcb_t *q = headBlocked(key); //coda dei processi del semaforo con chiave key
     if(q != NULL){
@@ -280,7 +257,7 @@ pcb_t* removeBlocked(int *key){
     return NULL;
 }
 
-//rimuove il PCB puntato da p dalla coda del semaforo su cui è bloccato
+//rimuove il PCB puntato da p dalla coda del semaforo su cui è bloccato
 void outChildBlocked(pcb_t *p){
     if(p != NULL){
         pcb_t *q = headBlocked(p -> p_semKey);//null se non trova il semaforo (impossibile)
