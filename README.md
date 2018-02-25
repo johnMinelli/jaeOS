@@ -16,9 +16,13 @@ Se si possiede gia' la cartella "phase1" passare direttamente alla fase C:
  
 #### Fase C
   - Cercare la cartella denominata "phase1" e spostarsi all'interno di questa (se la si e' scaricata, sara' all'interno della cartella "jaeOS-master").
-        ```$ cd cartella_estrazione/phase1```          
+  
+        ```$ cd cartella_estrazione/phase1```   
+  
   - Eseguire il comando 'make'.
+  
         ```$ make```         
+  
   - Verra' creato un file denominato "test". 
   - I file *.o verranno automaticamente rimossi.
 
