@@ -21,7 +21,7 @@ Se si possiede gia' la cartella "phase1" passare direttamente alla fase B:
 
 Progetto uARM:
 
-* [uARM](https://github.com/mellotanica/uARM) - Mellotanica's GitHub project
+* [uARM Code](https://github.com/mellotanica/uARM) - Mellotanica's GitHub project
 
 Specifiche consegna fase 1 e file utili:
 
@@ -29,7 +29,7 @@ Specifiche consegna fase 1 e file utili:
 
 Specifiche macchina emulata uARM:
 
-* [Fase 1](http://amslaurea.unibo.it/11866/) - tesi Melletti Marco
+* [uARM Doc](http://amslaurea.unibo.it/11866/) - tesi Melletti Marco
 
 License
 ----
