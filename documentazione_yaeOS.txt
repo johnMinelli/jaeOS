@@ -1,0 +1,36 @@
+﻿YAEOS
+
+
+Progetto di Sistemi Operativi
+Anno accademico 2017/2018
+Gruppo 20: 
+* Giovanni Minelli
+* Lorenzo Laricchia
+* Omar Serrah
+* Federico Foglietta
+
+
+
+
+Struttura progetto:
+* dir [phase1]
+   * dir [h]
+      * constants.h
+      * phase1.h
+   * dir[src]
+      * phase1.c
+   * Makefile
+   * test.c
+
+
+
+
+Note progettuali:
+
+
+La fase 1 di questo progetto contiene solo funzioni ricorsive.
+Nessuna funzione iterativa e’ stata utilizzata.
+---
+Mancano commenti relativi all’implementazione delle strutture quali semafori, pcb e alberi.
+---
+Manca sicuramente altro?
