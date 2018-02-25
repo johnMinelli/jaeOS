@@ -3,15 +3,20 @@ Yet Another Educational Operating System
 Fase 1 del progetto YaeOS.
 Anno accademico 2017/2018.
 ## Istruzioni di compilazione
-Se si possiede gia' la cartella "phase1" passare direttamente alla fase B:
-#### Fase A 
 
-  - Scaricare l'archivio.
+#### Fase A
+Per compilare correttamente il progetto e' necessario avere installato uARM (https://github.com/mellotanica/uARM).
+
+
+#### Fase B 
+Se si possiede gia' la cartella "phase1" passare direttamente alla fase C:
+
+  - Scaricare il progetto da GitHub (https://github.com/johnMinelli/jaeOS).
   - Scompattare l'archivio.
  
-#### Fase B
-  - Comparira' una cartella denominata "phase1" : spostarsi all'interno di questa.
-        ```$ cd cartella_estrazione/phase1```                
+#### Fase C
+  - Cercare la cartella denominata "phase1" e spostarsi all'interno di questa (se la si e' scaricata, sara' all'interno della cartella "jaeOS-master").
+        ```$ cd cartella_estrazione/phase1```          
   - Eseguire il comando 'make'.
         ```$ make```         
   - Verra' creato un file denominato "test". 
