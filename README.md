@@ -11,11 +11,11 @@ Per compilare correttamente il progetto e' necessario avere installato uARM (htt
 #### Fase B 
 Se si possiede gia' la cartella "phase1" passare direttamente alla fase C:
 
-  - Scaricare il progetto da GitHub (https://github.com/johnMinelli/jaeOS).
+  - Scaricare il progetto da GitHub (https://github.com/johnMinelli/yaeOS).
   - Scompattare l'archivio.
  
 #### Fase C
-  - Cercare la cartella denominata "phase1" e spostarsi all'interno di questa (se la si e' scaricata, sara' all'interno della cartella "jaeOS-master").
+  - Cercare la cartella denominata "phase1" e spostarsi all'interno di questa (se la si e' scaricata, sara' all'interno della cartella "yaeOS-master").
   
         $ cd cartella_estrazione/phase1  
   
