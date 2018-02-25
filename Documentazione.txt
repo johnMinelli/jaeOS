@@ -1,0 +1,36 @@
+﻿YAEOS
+
+
+Progetto di Sistemi Operativi
+Anno accademico 2017/2018
+Gruppo 20: 
+* Giovanni Minelli
+* Lorenzo Laricchia
+* Omar Serrah
+* Federico Foglietta
+
+
+
+
+Struttura progetto:
+* dir [phase1]
+   * dir [h]
+      * constants.h
+      * phase1.h
+   * dir[src]
+      * phase1.c
+   * Makefile
+   * test.c
+
+
+
+
+Note progettuali:
+
+
+La fase 1 di questo progetto contiene solo funzioni ricorsive.
+Nessuna funzione iterativa e’ stata utilizzata.
+Abbiamo seguito rigorosamente le specifiche (http://www.cs.unibo.it/~renzo/so/yaeos/phase1/phase1.v1.1.pdf) per definire e completare tutte le strutture e le funzioni necessarie.
+Il codice e’ commentato in modo da chiarire le modalita’ di alcune scelte ed eventuali dubbi sullo sviluppo delle funzioni.
+I file header (*.h) presenti nella cartella “h” contengono le dichiarazioni di funzione, costanti e strutture.
+Il file “phase1.c” presente nella cartella “src” contiene invece la definizione e implementazione delle funzioni.
