@@ -13,7 +13,7 @@ Per testare il progetto e' necessario avere installato uARM (https://github.com/
   - Scompattare l'archivio.
  
 #### Fase C
-  - Spostarsi all'interno della cartella master (il nominativo default sar‡ "yaeOS-master").
+  - Spostarsi all'interno della cartella master (il nominativo default sar√† "yaeOS-master").
   
         $ cd yaeOS-master
   
@@ -40,7 +40,8 @@ Progetto uARM:
 
 Specifiche consegna fase 2 e file utili:
 
-* [Fase 1](http://www.cs.unibo.it/~renzo/so/yaeos/phase2/) - Renzo Davoli
+* [Fase 1](http://www.cs.unibo.it/~renzo/so/yaeos/phase1/) - Renzo Davoli
+* [Fase 2](http://www.cs.unibo.it/~renzo/so/yaeos/phase2/) - Renzo Davoli
 
 Specifiche macchina emulata uARM:
 
