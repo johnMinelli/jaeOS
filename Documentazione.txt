@@ -1,36 +1,35 @@
 ﻿YAEOS
 
-
 Progetto di Sistemi Operativi
 Anno accademico 2017/2018
-Gruppo 20: 
-* Giovanni Minelli
-* Lorenzo Laricchia
-* Omar Serrah
-* Federico Foglietta
-
-
-
+Gruppo 20
 
 Struttura progetto:
-* dir [phase1]
-   * dir [h]
-      * constants.h
-      * phase1.h
+* dir [master]
+   * dir [h]	
+	* const.h
+	* types.h
+	* pcb.h
+	* asl.h
+	* init.h
    * dir[src]
-      * phase1.c
+      * pcb.c
+      * asl.c
+      * init.c
+      * scheduler.c
+      * exceptions.c
+      * interrupts.c
+      * p2test.c
    * Makefile
-   * test.c
 
 
 
 
 Note progettuali:
 
-
-La fase 1 di questo progetto contiene solo funzioni ricorsive.
-Nessuna funzione iterativa e’ stata utilizzata.
-Abbiamo seguito rigorosamente le specifiche (http://www.cs.unibo.it/~renzo/so/yaeos/phase1/phase1.v1.1.pdf) per definire e completare tutte le strutture e le funzioni necessarie.
-Il codice e’ commentato in modo da chiarire le modalita’ di alcune scelte ed eventuali dubbi sullo sviluppo delle funzioni.
-I file header (*.h) presenti nella cartella “h” contengono le dichiarazioni di funzione, costanti e strutture.
-Il file “phase1.c” presente nella cartella “src” contiene invece la definizione e implementazione delle funzioni.
+Il progetto nonostante sia basato sulla tesi originale di Marco Melletti se ne discosta per alcuni punti d'implementazione.
+Prendendo comunque come spunto iniziale il progetto più completo e dettagliato presentato nella tesi, abbiamo implementato rigorosamente tutte le specifiche (http://www.cs.unibo.it/~renzo/so/yaeos/phase2/phase2.v.0.3.pdf) previste dal progetto dell'anno corrente(2017-2018).
+Il codice e’ commentato in modo da chiarire le modalita’ di alcune scelte ed eventuali dubbi sullo sviluppo delle funzionalità.
+I file header 'pcb' e 'asl' contengono le funzioni base di interazione e gestione delle strutture del nostro SO.
+Il file 'init' contiene le procedure di inizializzazione mentre il core del sistema è stato suddiviso in modo logico all'interno dei file 'scheduler', 'exceptions' ed 'interrupts'.
+Infine il file 'p2test' contine il main il quale codice ha lo scopo principale di testare le funzionalità del SO.
